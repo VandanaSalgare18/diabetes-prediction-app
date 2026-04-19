@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Diabetes Prediction</title>
+
+
+<style>
+    body {
+        font-family: Arial;
+        background: linear-gradient(to right, #74ebd5, #ACB6E5);
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        background: white;
+        padding: 30px;
+        width: 400px;
+        margin: 50px auto;
+        border-radius: 15px;
+        box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    input {
+        width: 90%;
+        padding: 10px;
+        margin: 8px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #4CAF50;
+        outline: none;
+        box-shadow: 0 0 5px #4CAF50;
+    }
+
+    input[type="submit"] {
+        background: #4CAF50;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+        background: #45a049;
+    }
+
+    h3 {
+        color: #333;
+    }
+
+    img {
+        margin-top: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+    }
+
+    /* ✅ Result colors */
+    .diabetes {
+        color: red;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .no-diabetes {
+        color: green;
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Diabetes Prediction App</h2>
+
+
+<form method="post">
+    <input type="text" name="preg" placeholder="Pregnancies"><br>
+    <input type="text" name="glucose" placeholder="Glucose"><br>
+    <input type="text" name="bp" placeholder="Blood Pressure"><br>
+    <input type="text" name="skin" placeholder="Skin Thickness"><br>
+    <input type="text" name="insulin" placeholder="Insulin"><br>
+    <input type="text" name="bmi" placeholder="BMI"><br>
+    <input type="text" name="dpf" placeholder="DPF"><br>
+    <input type="text" name="age" placeholder="Age"><br><br>
+
+    <input type="submit" value="Predict">
+</form>
+
+{% if prediction %}
+
+    {% if prediction == "Diabetes Detected" %}
+        <h3 class="diabetes">Result: {{prediction}}</h3>
+    {% else %}
+        <h3 class="no-diabetes">Result: {{prediction}}</h3>
+    {% endif %}
+
+    <h3>Model Accuracy: {{accuracy}}%</h3>
+
+    <h3>Graphs:</h3>
+
+    <div>
+        <img src="{{ url_for('static', filename='graph1.png') }}" width="300">
+        <p><b>Diabetes Count:</b> This graph shows the number of people with and without diabetes in the dataset.</p>
+    </div>
+
+    <div>
+        <img src="{{ url_for('static', filename='graph2.png') }}" width="300">
+        <p><b>Glucose Distribution:</b> This graph shows how glucose levels vary among patients. Higher glucose levels indicate higher diabetes risk.</p>
+    </div>
+
+{% endif %}
+
+
+</div>
+
+</body>
+</html>
